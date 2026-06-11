@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import model.CourierModel;
 import org.junit.After;
@@ -30,6 +32,8 @@ public class LoginCourierTest extends BaseApiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через существующий логин")
+    @Description("Генерируем курьера и проверяем его успешную авторизацию")
     public void testLoginCourierSuccess() {
         CourierModel loginData = new CourierModel(courier.getLogin(), courier.getPassword(), null);
         loginCourier(loginData)
@@ -40,6 +44,8 @@ public class LoginCourierTest extends BaseApiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через несуществующий логин")
+    @Description("Генерируем курьера и ожидаем ошибку при авторизации через несуществующий логин")
     public void testLoginIncorrectLoginFail() {
         CourierModel loginData = new CourierModel("NEW", courier.getPassword(), null);
         loginCourier(loginData)
@@ -50,6 +56,8 @@ public class LoginCourierTest extends BaseApiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через несуществующий пароль")
+    @Description("Генерируем курьера и ожидаем ошибку при авторизации через несуществующий пароль")
     public void testLoginIncorrectPasswordFail() {
         CourierModel loginData = new CourierModel(courier.getLogin(), "1234", null);
         loginCourier(loginData)
@@ -60,6 +68,8 @@ public class LoginCourierTest extends BaseApiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через пустой логин")
+    @Description("Генерируем курьера и ожидаем ошибку при авторизации через пустой логин")
     public void testLoginNull() {
         CourierModel loginData = new CourierModel(null, courier.getPassword(), null);
         loginCourier(loginData)
@@ -70,6 +80,8 @@ public class LoginCourierTest extends BaseApiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через пустой пароль")
+    @Description("Генерируем курьера и ожидаем ошибку при авторизации через пустой пароль")
     public void testLoginPasswordNull() {
         CourierModel loginData = new CourierModel(courier.getLogin(), null, null);
         loginCourier(loginData)

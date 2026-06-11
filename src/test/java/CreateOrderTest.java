@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import model.OrderModel;
 import org.junit.After;
@@ -37,6 +39,8 @@ public class CreateOrderTest extends BaseApiTest {
         }
     }
     @Test
+    @DisplayName("Создание заказа с разным цветом")
+    @Description("Генерируем новый заказ с рандомным цветом и проверяем что он верно создан")
     public void testCreateOrderDifferentColor() {
         OrderModel order = getRandomOrder(color);
         Response response = createOrder(order);

@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import model.CourierModel;
 import org.junit.After;
@@ -24,6 +26,8 @@ public class CreateCourierTest extends BaseApiTest {
             }
         }
         @Test
+        @DisplayName("Создание курьера")
+        @Description("Генерируем курьера и проверяем что он успешно добавлен")
          public void testCreateCourierSuccess() {
         createCourier(courier)
                 .then()
@@ -32,6 +36,8 @@ public class CreateCourierTest extends BaseApiTest {
                 .body("ok", equalTo(true));
     }
     @Test
+    @DisplayName("Создание дубликата курьера")
+    @Description("Генерируем двух одинаковых курьеров и проверяем что появилась ошибка")
          public void testCreateCourierDuplicate() {
         createCourier(courier);
         createCourier(courier)
@@ -41,6 +47,8 @@ public class CreateCourierTest extends BaseApiTest {
                     .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
     @Test
+    @DisplayName("Создание курьера без логина")
+    @Description("Генерируем курьера без логина и проверяем что появилась ошибка")
      public void testCreateCourierWithoutLogin() {
             courier.setLogin("");
         createCourier(courier)
@@ -50,6 +58,8 @@ public class CreateCourierTest extends BaseApiTest {
                 .body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
     @Test
+    @DisplayName("Создание курьера без пароля")
+    @Description("Генерируем курьера без пароля и проверяем что появилась ошибка")
      public void testCreateCourierWithoutPassword() {
             courier.setPassword("");
         createCourier(courier)
